@@ -2,6 +2,7 @@ package com.vibhorpatil.newsapp.di.component
 
 import com.vibhorpatil.newsapp.di.module.ActivityModule
 import com.vibhorpatil.newsapp.di.module.ActivityScope
+import com.vibhorpatil.newsapp.ui.newssource.NewsSourceActivity
 import com.vibhorpatil.newsapp.ui.topheadline.TopHeadlineActivity
 import dagger.Component
 
@@ -10,4 +11,6 @@ import dagger.Component
 interface ActivityComponent {
 
     fun inject(activity: TopHeadlineActivity)
+
+    fun inject(activity: NewsSourceActivity)
 }

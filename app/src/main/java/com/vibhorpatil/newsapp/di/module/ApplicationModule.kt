@@ -6,6 +6,8 @@ import com.vibhorpatil.newsapp.data.api.NetworkService
 import com.vibhorpatil.newsapp.utils.WebServiceConstant.BASE_URL
 import dagger.Module
 import dagger.Provides
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -31,12 +33,25 @@ class ApplicationModule(private val application: NewsApplication) {
     @Singleton
     @Provides
     fun provideNetworkService(
-        @BaseURL baseUrl: String, gsonConverterFactory: GsonConverterFactory
-    ) : NetworkService {
-        return Retrofit
-            .Builder()
+        @BaseURL baseUrl: String,
+        gsonConverterFactory: GsonConverterFactory
+    ): NetworkService {
+
+        // 1. Create logging interceptor
+        val logging = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
+        // 2. Create OkHttpClient with logging interceptor
+        val okHttpClient = OkHttpClient.Builder()
+            .addInterceptor(logging)
+            .build()
+
+        // 3. Build Retrofit with OkHttpClient
+        return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(gsonConverterFactory)
+            .client(okHttpClient)
             .build()
             .create(NetworkService::class.java)
     }
