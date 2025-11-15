@@ -2,6 +2,8 @@ package com.vibhorpatil.newsapp.di.component
 
 import android.content.Context
 import com.vibhorpatil.newsapp.NewsApplication
+import com.vibhorpatil.newsapp.data.api.NetworkService
+import com.vibhorpatil.newsapp.data.repository.TopHeadLineRepository
 import com.vibhorpatil.newsapp.di.module.ApplicationContext
 import com.vibhorpatil.newsapp.di.module.ApplicationModule
 import dagger.Component
@@ -15,4 +17,8 @@ interface ApplicationComponent {
 
     @ApplicationContext
     fun getContext(): Context
+
+    fun getNetworkService(): NetworkService
+
+    fun getTopHeadLineRepository(): TopHeadLineRepository
 }

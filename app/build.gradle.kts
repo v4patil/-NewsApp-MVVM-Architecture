@@ -34,6 +34,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -55,4 +59,7 @@ dependencies {
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
+
+    implementation(libs.browser)//for open the web page when clicked on the itemView
+
 }

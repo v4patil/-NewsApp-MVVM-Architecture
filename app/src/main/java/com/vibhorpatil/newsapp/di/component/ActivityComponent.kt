@@ -6,7 +6,7 @@ import com.vibhorpatil.newsapp.ui.topheadline.TopHeadlineActivity
 import dagger.Component
 
 @ActivityScope
-@Component(modules = [ActivityModule::class])
+@Component(modules = [ActivityModule::class], dependencies = [ApplicationComponent::class])
 interface ActivityComponent {
 
     fun inject(activity: TopHeadlineActivity)

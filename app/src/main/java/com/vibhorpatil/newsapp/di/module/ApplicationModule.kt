@@ -19,7 +19,7 @@ class ApplicationModule(private val application: NewsApplication) {
         return application
     }
 
-    @BaseURL
+    @BaseURL // To distinguish between the object having same return type
     @Provides
     fun provideBaseUrl(): String = BASE_URL
 
@@ -31,7 +31,7 @@ class ApplicationModule(private val application: NewsApplication) {
     @Singleton
     @Provides
     fun provideNetworkService(
-        baseUrl: String, gsonConverterFactory: GsonConverterFactory
+        @BaseURL baseUrl: String, gsonConverterFactory: GsonConverterFactory
     ) : NetworkService {
         return Retrofit
             .Builder()
