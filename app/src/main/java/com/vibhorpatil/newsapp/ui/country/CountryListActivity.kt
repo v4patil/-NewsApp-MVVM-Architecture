@@ -1,25 +1,21 @@
 package com.vibhorpatil.newsapp.ui.country
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vibhorpatil.newsapp.NewsApplication
-import com.vibhorpatil.newsapp.R
 import com.vibhorpatil.newsapp.data.model.Country
 import com.vibhorpatil.newsapp.databinding.ActivityCountryListBinding
 import com.vibhorpatil.newsapp.di.component.DaggerActivityComponent
 import com.vibhorpatil.newsapp.di.module.ActivityModule
 import com.vibhorpatil.newsapp.ui.base.UiState
-import kotlinx.coroutines.flow.collect
+import com.vibhorpatil.newsapp.ui.topheadline.TopHeadlineActivity
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -39,6 +35,7 @@ class CountryListActivity : AppCompatActivity() {
         binding = ActivityCountryListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setUpUI()
+        setupClickListener()
         setUpObserver()
     }
 
@@ -46,6 +43,14 @@ class CountryListActivity : AppCompatActivity() {
         val recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
+    }
+
+    private fun setupClickListener() {
+        adapter.setOnCountryClickListener { country ->
+            val intent = Intent(this, TopHeadlineActivity::class.java)
+            intent.putExtra("country_code", country.countryId)
+            startActivity(intent)
+        }
     }
 
     private fun injectDependencies() {

@@ -7,7 +7,6 @@ import com.vibhorpatil.newsapp.ui.base.UiState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
@@ -80,6 +79,7 @@ class CountryListViewModel : ViewModel() {
         countryList.add(Country("sg", "Singapore"))
         countryList.add(Country("sk", "Slovakia"))
         countryList.add(Country("si", "Slovenia"))
+        countryList.add(Country("us", "United States"))
 
         countryList.sortBy { it.countryName }
         emit(countryList)

@@ -15,6 +15,7 @@ import com.vibhorpatil.newsapp.databinding.ActivityTopHeadlineBinding
 import com.vibhorpatil.newsapp.di.component.DaggerActivityComponent
 import com.vibhorpatil.newsapp.di.module.ActivityModule
 import com.vibhorpatil.newsapp.ui.base.UiState
+import com.vibhorpatil.newsapp.utils.AppConstant.COUNTRY
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -33,6 +34,7 @@ class TopHeadlineActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTopHeadlineBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        getIntentData()
         setupUI()
         setupObserver()
     }
@@ -44,6 +46,11 @@ class TopHeadlineActivity : AppCompatActivity() {
             .activityModule(ActivityModule(this))
             .build()
             .inject(this)
+    }
+
+    private fun getIntentData() {
+        val countryCode = intent.getStringExtra("country_code") ?: COUNTRY
+        topHeadLineViewmodel.getTopHeadLines(countryCode)
     }
 
     private fun setupUI() {

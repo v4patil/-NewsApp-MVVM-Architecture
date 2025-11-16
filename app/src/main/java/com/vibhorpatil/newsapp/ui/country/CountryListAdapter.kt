@@ -12,6 +12,12 @@ import javax.inject.Inject
 class CountryListAdapter @Inject constructor(private val countryList: ArrayList<Country>) :
     RecyclerView.Adapter<CountryListAdapter.CountryViewHolder>() {
 
+    private var listener: ((Country) -> Unit)? = null
+
+    fun setOnCountryClickListener(l: (Country) -> Unit) {
+        listener = l
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
         return CountryViewHolder(
@@ -26,7 +32,7 @@ class CountryListAdapter @Inject constructor(private val countryList: ArrayList<
     override fun getItemCount() = countryList.size
 
     override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
-        holder.bind(countryList[position])
+        holder.bind(countryList[position], listener)
     }
 
     fun addData(list: ArrayList<Country>) {
@@ -36,8 +42,11 @@ class CountryListAdapter @Inject constructor(private val countryList: ArrayList<
 
     class CountryViewHolder(private val binding: ItemCountryNameBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(country: Country) {
+        fun bind(country: Country, listener: ((Country) -> Unit)?) {
             binding.tvCountryName.text = country.countryName
+            itemView.setOnClickListener {
+                listener?.invoke(country)
+            }
         }
 
     }
