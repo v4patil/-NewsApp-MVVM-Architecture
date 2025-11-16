@@ -80,5 +80,8 @@ class CountryListViewModel : ViewModel() {
         countryList.add(Country("sg", "Singapore"))
         countryList.add(Country("sk", "Slovakia"))
         countryList.add(Country("si", "Slovenia"))
+
+        countryList.sortBy { it.countryName }
+        emit(countryList)
     }
 }

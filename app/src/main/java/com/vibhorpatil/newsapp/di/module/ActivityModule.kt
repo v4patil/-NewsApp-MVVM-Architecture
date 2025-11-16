@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.vibhorpatil.newsapp.data.model.Article
+import com.vibhorpatil.newsapp.data.model.Country
 import com.vibhorpatil.newsapp.data.model.NewsSource
 import com.vibhorpatil.newsapp.data.repository.NewsSourceRepository
 import com.vibhorpatil.newsapp.data.repository.TopHeadLineRepository
 import com.vibhorpatil.newsapp.ui.base.ViewModelProviderFactory
+import com.vibhorpatil.newsapp.ui.country.CountryListViewModel
 import com.vibhorpatil.newsapp.ui.newssource.NewsSourceViewModel
 import com.vibhorpatil.newsapp.ui.topheadline.TopHeadLineAdapter
 import com.vibhorpatil.newsapp.ui.topheadline.TopHeadLineViewmodel
@@ -46,10 +48,18 @@ class ActivityModule(private val activity: AppCompatActivity ) {
     }
 
     @Provides
+    fun providesCountryListViewModel() : CountryListViewModel {
+        return CountryListViewModel()
+    }
+
+    @Provides
     fun provideEmptyList() = ArrayList<Article>()
 
     @Provides
     fun provideNewsSourceEmptyList() =  ArrayList<NewsSource>()
+
+    @Provides
+    fun provideCountryNameEmptyList() =  ArrayList<Country>()
 
     @Provides
     fun provideTopHeadLineAdapter() = TopHeadLineAdapter(ArrayList())

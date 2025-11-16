@@ -5,8 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vibhorpatil.newsapp.data.model.Country
 import com.vibhorpatil.newsapp.databinding.ItemCountryNameBinding
+import com.vibhorpatil.newsapp.di.module.ActivityScope
+import javax.inject.Inject
 
-class CountryListAdapter(private var countryList: ArrayList<Country>) :
+@ActivityScope
+class CountryListAdapter @Inject constructor(private val countryList: ArrayList<Country>) :
     RecyclerView.Adapter<CountryListAdapter.CountryViewHolder>() {
 
 
