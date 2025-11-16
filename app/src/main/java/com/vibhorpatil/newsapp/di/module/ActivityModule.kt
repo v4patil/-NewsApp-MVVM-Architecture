@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.vibhorpatil.newsapp.data.model.Article
 import com.vibhorpatil.newsapp.data.model.Country
+import com.vibhorpatil.newsapp.data.model.Language
 import com.vibhorpatil.newsapp.data.model.NewsSource
 import com.vibhorpatil.newsapp.data.repository.NewsSourceRepository
 import com.vibhorpatil.newsapp.data.repository.TopHeadLineRepository
@@ -60,6 +61,9 @@ class ActivityModule(private val activity: AppCompatActivity ) {
 
     @Provides
     fun provideCountryNameEmptyList() =  ArrayList<Country>()
+
+    @Provides
+    fun provideLanguageNameEmptyList() = ArrayList<Language>()
 
     @Provides
     fun provideTopHeadLineAdapter() = TopHeadLineAdapter(ArrayList())
