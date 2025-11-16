@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
 class LanguageListViewModel : ViewModel() {
-    val _uiState = MutableStateFlow<UiState<List<Language>>>(UiState.Loading)
+    private val _uiState = MutableStateFlow<UiState<List<Language>>>(UiState.Loading)
 
     val uiState: StateFlow<UiState<List<Language>>> = _uiState
 

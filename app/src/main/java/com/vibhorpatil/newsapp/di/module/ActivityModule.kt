@@ -12,6 +12,7 @@ import com.vibhorpatil.newsapp.data.repository.NewsSourceRepository
 import com.vibhorpatil.newsapp.data.repository.TopHeadLineRepository
 import com.vibhorpatil.newsapp.ui.base.ViewModelProviderFactory
 import com.vibhorpatil.newsapp.ui.country.CountryListViewModel
+import com.vibhorpatil.newsapp.ui.language.LanguageListViewModel
 import com.vibhorpatil.newsapp.ui.newssource.NewsSourceViewModel
 import com.vibhorpatil.newsapp.ui.topheadline.TopHeadLineAdapter
 import com.vibhorpatil.newsapp.ui.topheadline.TopHeadLineViewmodel
@@ -67,6 +68,9 @@ class ActivityModule(private val activity: AppCompatActivity ) {
 
     @Provides
     fun provideTopHeadLineAdapter() = TopHeadLineAdapter(ArrayList())
+
+    @Provides
+    fun provideLanguageListViewModel() = LanguageListViewModel()
 
 
 }

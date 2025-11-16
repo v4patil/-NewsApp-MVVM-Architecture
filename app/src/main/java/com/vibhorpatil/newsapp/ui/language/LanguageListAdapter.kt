@@ -25,6 +25,10 @@ class LanguageListAdapter @Inject constructor(private val languageList: ArrayLis
         holder.bind(languageList[position])
     }
 
+    fun addData(list: ArrayList<Language>){
+        languageList.addAll(list)
+    }
+
     class LanguageViewHolder(private val binding: ItemNewsSourceBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(language: Language) {
