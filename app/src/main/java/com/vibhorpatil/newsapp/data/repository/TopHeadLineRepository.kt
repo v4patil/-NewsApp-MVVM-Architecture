@@ -34,4 +34,12 @@ class TopHeadLineRepository @Inject constructor(private val networkService: Netw
             it.articles
         }
     }
+
+    fun getTopHeadLinesBySearchText(searchText: String): Flow<List<Article>> {
+        return flow {
+            emit(networkService.getTopHeadLinesBySearchText(searchText))
+        }.map{
+            it.articles
+        }
+    }
 }

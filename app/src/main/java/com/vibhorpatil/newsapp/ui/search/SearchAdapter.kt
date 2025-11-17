@@ -31,6 +31,7 @@ class SearchAdapter @Inject constructor(private val articleList: ArrayList<Artic
     }
 
     fun addData(list: ArrayList<Article>){
+        articleList.clear()
         articleList.addAll(list)
     }
 

@@ -49,15 +49,15 @@ class ActivityModule(private val activity: AppCompatActivity ) {
         )[NewsSourceViewModel::class.java]
     }
 
-    @Provides
-    fun provideSearchViewModel(repository: TopHeadLineRepository) : SearchViewModel {
-        return ViewModelProvider(
-            activity,
-            ViewModelProviderFactory(SearchViewModel::class) {
-                SearchViewModel(repository)
-            }
-        )[SearchViewModel::class.java]
-    }
+//    @Provides
+//    fun provideSearchViewModel(repository: TopHeadLineRepository) : SearchViewModel {
+//        return ViewModelProvider(
+//            activity,
+//            ViewModelProviderFactory(SearchViewModel::class) {
+//                SearchViewModel(repository)
+//            }
+//        )[SearchViewModel::class.java]
+//    }
 
     @Provides
     fun providesCountryListViewModel() : CountryListViewModel {

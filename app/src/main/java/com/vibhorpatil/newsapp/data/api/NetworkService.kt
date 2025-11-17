@@ -27,6 +27,10 @@ interface NetworkService {
     @GET(GET_EVERYTHING)
     suspend fun getTopHeadLinesBySource(@Query("source") sourceId: String,@Query("q") str: String = "football"): TopHeadLineResponse
 
+    @Headers("$API_KEY_STR: $API_KEY", "User-Agent: ABC")
+    @GET(GET_EVERYTHING)
+    suspend fun getTopHeadLinesBySearchText(@Query("q") str: String = "football"): TopHeadLineResponse
+
 
     @Headers("$API_KEY_STR: $API_KEY", "User-Agent: ABC" )
     @GET(GET_TOP_HEADLINE_SOURCE)
