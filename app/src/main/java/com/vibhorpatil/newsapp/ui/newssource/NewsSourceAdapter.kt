@@ -12,6 +12,11 @@ import javax.inject.Inject
 class NewsSourceAdapter @Inject constructor(private val sourceList: ArrayList<NewsSource>) :
     RecyclerView.Adapter<NewsSourceAdapter.NewsSourceDataHolder>() {
 
+    private var listener: ((NewsSource) -> Unit)? = null
+
+    fun setOnCountryClickListener(l: (NewsSource) -> Unit) {
+        listener = l
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsSourceDataHolder {
         return NewsSourceDataHolder(
@@ -26,7 +31,7 @@ class NewsSourceAdapter @Inject constructor(private val sourceList: ArrayList<Ne
     override fun getItemCount() = sourceList.size
 
     override fun onBindViewHolder(holder: NewsSourceDataHolder, position: Int) {
-        holder.bind(sourceList[position])
+        holder.bind(sourceList[position], listener)
     }
 
     fun addData(list: ArrayList<NewsSource>){
@@ -36,8 +41,11 @@ class NewsSourceAdapter @Inject constructor(private val sourceList: ArrayList<Ne
     class NewsSourceDataHolder(private val binding: ItemNewsSourceBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(newsSource: NewsSource) {
+        fun bind(newsSource: NewsSource, listener: ((NewsSource) -> Unit)?) {
             binding.tvNewsSourceName.text = newsSource.sourceName
+            itemView.setOnClickListener {
+                listener?.invoke(newsSource)
+            }
         }
 
     }

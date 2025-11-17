@@ -30,5 +30,29 @@ class TopHeadLineViewmodel (private val repository: TopHeadLineRepository) :
         }
     }
 
+    fun getTopHeadLinesByLanguage(languageId: String) {
+        viewModelScope.launch {
+            repository.getTopHeadLinesByLanguageId(languageId)
+                .catch { e ->
+                    _uiState.value = UiState.Error(e.toString())
+                }
+                .collect{
+                    _uiState.value = UiState.Success(it)
+                }
+        }
+    }
+
+    fun getTopHeadLinesBySource(sourceId: String) {
+        viewModelScope.launch {
+            repository.getTopHeadLinesBySourceId(sourceId)
+                .catch { e ->
+                    _uiState.value = UiState.Error(e.toString())
+                }
+                .collect {
+                    _uiState.value = UiState.Success(it)
+                }
+        }
+    }
+
 
 }

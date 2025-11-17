@@ -49,8 +49,16 @@ class TopHeadlineActivity : AppCompatActivity() {
     }
 
     private fun getIntentData() {
-        val countryCode = intent.getStringExtra("country_code") ?: COUNTRY
-        topHeadLineViewmodel.getTopHeadLines(countryCode)
+        if (intent.hasExtra("language_id")) {
+            val languageId = intent.getStringExtra("language_id") ?: COUNTRY
+            topHeadLineViewmodel.getTopHeadLinesByLanguage(languageId)
+        } else if (intent.hasExtra("source_id")) {
+            val sourceId = intent.getStringExtra("source_id") ?: COUNTRY
+            topHeadLineViewmodel.getTopHeadLinesBySource(sourceId)
+        } else {
+            val countryCode = intent.getStringExtra("country_code") ?: COUNTRY
+            topHeadLineViewmodel.getTopHeadLines(countryCode)
+        }
     }
 
     private fun setupUI() {

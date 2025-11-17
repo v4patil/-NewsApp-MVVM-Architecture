@@ -1,5 +1,6 @@
 package com.vibhorpatil.newsapp.ui.newssource
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -14,6 +15,7 @@ import com.vibhorpatil.newsapp.databinding.ActivityNewsSourceBinding
 import com.vibhorpatil.newsapp.di.component.DaggerActivityComponent
 import com.vibhorpatil.newsapp.di.module.ActivityModule
 import com.vibhorpatil.newsapp.ui.base.UiState
+import com.vibhorpatil.newsapp.ui.topheadline.TopHeadlineActivity
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,6 +36,7 @@ class NewsSourceActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupUI()
         setupObserver()
+        setupClickListener()
 
     }
 
@@ -73,6 +76,14 @@ class NewsSourceActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+    }
+
+    private fun setupClickListener() {
+        adapter.setOnCountryClickListener { newsSource ->
+            val intent = Intent(this, TopHeadlineActivity::class.java)
+            intent.putExtra("source_id", newsSource.sourceName)
+            startActivity(intent)
         }
     }
 

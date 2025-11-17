@@ -1,5 +1,6 @@
 package com.vibhorpatil.newsapp.ui.language
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -20,6 +21,7 @@ import com.vibhorpatil.newsapp.databinding.ActivityLanguageListBinding
 import com.vibhorpatil.newsapp.di.component.DaggerActivityComponent
 import com.vibhorpatil.newsapp.di.module.ActivityModule
 import com.vibhorpatil.newsapp.ui.base.UiState
+import com.vibhorpatil.newsapp.ui.topheadline.TopHeadlineActivity
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -39,6 +41,7 @@ class LanguageListActivity : AppCompatActivity() {
         setContentView(binding.root)
         setUpUI()
         setUpObserver()
+        setupClickListener()
     }
 
     private fun injectDependencies() {
@@ -76,6 +79,14 @@ class LanguageListActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+    }
+
+    private fun setupClickListener() {
+        adapter.setOnCountryClickListener { language ->
+            val intent = Intent(this, TopHeadlineActivity::class.java)
+            intent.putExtra("language_id", language.languageID)
+            startActivity(intent)
         }
     }
 

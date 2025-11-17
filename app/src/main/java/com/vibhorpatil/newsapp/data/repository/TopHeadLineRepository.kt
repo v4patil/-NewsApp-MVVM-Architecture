@@ -18,4 +18,20 @@ class TopHeadLineRepository @Inject constructor(private val networkService: Netw
             it.articles
         }
     }
+
+    fun getTopHeadLinesByLanguageId(languageId: String): Flow<List<Article>> {
+        return flow {
+            emit(networkService.getTopHeadLinesByLanguage(languageId))
+        }.map{
+            it.articles
+        }
+    }
+
+    fun getTopHeadLinesBySourceId(sourceId: String): Flow<List<Article>> {
+        return flow {
+            emit(networkService.getTopHeadLinesBySource(sourceId))
+        }.map{
+            it.articles
+        }
+    }
 }

@@ -8,4 +8,5 @@ object WebServiceConstant {
 
     const val GET_TOP_HEADLINE = "top-headlines"
     const val GET_TOP_HEADLINE_SOURCE = "top-headlines/sources"
+    const val GET_EVERYTHING = "everything"
 }
