@@ -2,7 +2,6 @@ package com.vibhorpatil.newsapp.di.module
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.vibhorpatil.newsapp.data.model.Article
 import com.vibhorpatil.newsapp.data.model.Country
@@ -14,6 +13,7 @@ import com.vibhorpatil.newsapp.ui.base.ViewModelProviderFactory
 import com.vibhorpatil.newsapp.ui.country.CountryListViewModel
 import com.vibhorpatil.newsapp.ui.language.LanguageListViewModel
 import com.vibhorpatil.newsapp.ui.newssource.NewsSourceViewModel
+import com.vibhorpatil.newsapp.ui.search.SearchViewModel
 import com.vibhorpatil.newsapp.ui.topheadline.TopHeadLineAdapter
 import com.vibhorpatil.newsapp.ui.topheadline.TopHeadLineViewmodel
 import dagger.Module
@@ -47,6 +47,16 @@ class ActivityModule(private val activity: AppCompatActivity ) {
                 NewsSourceViewModel(newsSourceRepository)
             }
         )[NewsSourceViewModel::class.java]
+    }
+
+    @Provides
+    fun provideSearchViewModel(repository: TopHeadLineRepository) : SearchViewModel {
+        return ViewModelProvider(
+            activity,
+            ViewModelProviderFactory(SearchViewModel::class) {
+                SearchViewModel(repository)
+            }
+        )[SearchViewModel::class.java]
     }
 
     @Provides

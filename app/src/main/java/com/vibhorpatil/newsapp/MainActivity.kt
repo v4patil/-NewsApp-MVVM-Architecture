@@ -11,6 +11,7 @@ import com.vibhorpatil.newsapp.databinding.ActivityMainBinding
 import com.vibhorpatil.newsapp.ui.country.CountryListActivity
 import com.vibhorpatil.newsapp.ui.language.LanguageListActivity
 import com.vibhorpatil.newsapp.ui.newssource.NewsSourceActivity
+import com.vibhorpatil.newsapp.ui.search.SearchActivity
 import com.vibhorpatil.newsapp.ui.topheadline.TopHeadlineActivity
 
 class MainActivity : AppCompatActivity() {
@@ -43,6 +44,11 @@ class MainActivity : AppCompatActivity() {
 
         activityMainBinding.btnLanguages.setOnClickListener {
             val intent = Intent(this, LanguageListActivity::class.java);
+            startActivity(intent)
+        }
+
+        activityMainBinding.btnSearch.setOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java);
             startActivity(intent)
         }
     }
