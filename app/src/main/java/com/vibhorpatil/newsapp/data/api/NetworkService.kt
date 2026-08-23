@@ -24,7 +24,7 @@ interface NetworkService {
 
     @Headers("$API_KEY_STR: $API_KEY", "User-Agent: ABC")
     @GET(GET_TOP_HEADLINE)
-    suspend fun getTopHeadLinesBySource(@Query("source") sourceId: String): TopHeadLineResponse
+    suspend fun getTopHeadLinesBySource(@Query("sources") sourceId: String): TopHeadLineResponse
 
     @Headers("$API_KEY_STR: $API_KEY", "User-Agent: ABC")
     @GET(GET_EVERYTHING)
