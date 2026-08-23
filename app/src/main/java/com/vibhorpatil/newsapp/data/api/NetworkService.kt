@@ -1,6 +1,5 @@
 package com.vibhorpatil.newsapp.data.api
 
-import com.vibhorpatil.newsapp.data.model.NewsSource
 import com.vibhorpatil.newsapp.data.model.NewsSourceResponse
 import com.vibhorpatil.newsapp.data.model.TopHeadLineResponse
 import com.vibhorpatil.newsapp.utils.AppConstant.API_KEY
@@ -20,12 +19,12 @@ interface NetworkService {
     suspend fun getTopHeadLines(@Query("country") country: String) : TopHeadLineResponse
 
     @Headers("$API_KEY_STR: $API_KEY", "User-Agent: ABC")
-    @GET(GET_EVERYTHING)
-    suspend fun getTopHeadLinesByLanguage(@Query("language") languageId: String, @Query("q") str: String = "football") : TopHeadLineResponse
+    @GET(GET_TOP_HEADLINE)
+    suspend fun getTopHeadLinesByLanguage(@Query("language") languageId: String) : TopHeadLineResponse
 
     @Headers("$API_KEY_STR: $API_KEY", "User-Agent: ABC")
-    @GET(GET_EVERYTHING)
-    suspend fun getTopHeadLinesBySource(@Query("source") sourceId: String,@Query("q") str: String = "football"): TopHeadLineResponse
+    @GET(GET_TOP_HEADLINE)
+    suspend fun getTopHeadLinesBySource(@Query("source") sourceId: String): TopHeadLineResponse
 
     @Headers("$API_KEY_STR: $API_KEY", "User-Agent: ABC")
     @GET(GET_EVERYTHING)

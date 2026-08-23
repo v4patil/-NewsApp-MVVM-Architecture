@@ -45,7 +45,7 @@ class NewsCriteriaViewModel @Inject constructor(
                 val countryList = newsSourceRepository.getNewsSources()
                 countryList.map { newsSourceList ->
                     newsSourceList.map {
-                        NewsCriteria(it.sourceName, it.sourceName)
+                        NewsCriteria(it.id, it.sourceName)
                     }
                 }.catch {
                     _uiState.value = UiState.Error(it.toString())
