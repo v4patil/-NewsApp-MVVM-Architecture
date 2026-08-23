@@ -1,21 +1,16 @@
 package com.vibhorpatil.newsapp.ui.search
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vibhorpatil.newsapp.NewsApplication
-import com.vibhorpatil.newsapp.R
 import com.vibhorpatil.newsapp.data.model.Article
 import com.vibhorpatil.newsapp.databinding.ActivitySearchBinding
 import com.vibhorpatil.newsapp.di.component.DaggerActivityComponent
@@ -95,18 +90,25 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun setListener() {
-        binding.svSearchNews.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let {
-                    searchViewModel.searchBy(it)
-                }
-                return true
-            }
+        binding.svSearchNews.apply {
+            isIconified = false
+            requestFocus()
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return true
-            }
-        })
+            setQueryHint("Search news")
+
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    query?.let {
+                        searchViewModel.searchBy(it)
+                    }
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return true
+                }
+            })
+        }
     }
 
 
