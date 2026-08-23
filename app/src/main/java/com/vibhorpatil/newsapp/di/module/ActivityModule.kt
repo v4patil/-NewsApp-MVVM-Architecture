@@ -4,16 +4,13 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.vibhorpatil.newsapp.data.model.Article
-import com.vibhorpatil.newsapp.data.model.Country
-import com.vibhorpatil.newsapp.data.model.Language
+import com.vibhorpatil.newsapp.data.model.NewsCriteria
 import com.vibhorpatil.newsapp.data.model.NewsSource
 import com.vibhorpatil.newsapp.data.repository.NewsSourceRepository
 import com.vibhorpatil.newsapp.data.repository.TopHeadLineRepository
 import com.vibhorpatil.newsapp.ui.base.ViewModelProviderFactory
-import com.vibhorpatil.newsapp.ui.country.CountryListViewModel
-import com.vibhorpatil.newsapp.ui.language.LanguageListViewModel
+import com.vibhorpatil.newsapp.ui.newscriteria.NewsCriteriaViewModel
 import com.vibhorpatil.newsapp.ui.newssource.NewsSourceViewModel
-import com.vibhorpatil.newsapp.ui.search.SearchViewModel
 import com.vibhorpatil.newsapp.ui.topheadline.TopHeadLineAdapter
 import com.vibhorpatil.newsapp.ui.topheadline.TopHeadLineViewmodel
 import dagger.Module
@@ -49,6 +46,16 @@ class ActivityModule(private val activity: AppCompatActivity ) {
         )[NewsSourceViewModel::class.java]
     }
 
+    @Provides
+    fun provideNewsCriteriaViewModel(newsSourceRepository: NewsSourceRepository) : NewsCriteriaViewModel {
+        return ViewModelProvider(
+            activity,
+            ViewModelProviderFactory(NewsCriteriaViewModel::class){
+                NewsCriteriaViewModel(newsSourceRepository)
+            }
+        )[NewsCriteriaViewModel::class.java]
+    }
+
 //    @Provides
 //    fun provideSearchViewModel(repository: TopHeadLineRepository) : SearchViewModel {
 //        return ViewModelProvider(
@@ -59,10 +66,6 @@ class ActivityModule(private val activity: AppCompatActivity ) {
 //        )[SearchViewModel::class.java]
 //    }
 
-    @Provides
-    fun providesCountryListViewModel() : CountryListViewModel {
-        return CountryListViewModel()
-    }
 
     @Provides
     fun provideEmptyList() = ArrayList<Article>()
@@ -71,16 +74,9 @@ class ActivityModule(private val activity: AppCompatActivity ) {
     fun provideNewsSourceEmptyList() =  ArrayList<NewsSource>()
 
     @Provides
-    fun provideCountryNameEmptyList() =  ArrayList<Country>()
-
-    @Provides
-    fun provideLanguageNameEmptyList() = ArrayList<Language>()
+    fun provideNewsCriteriaEmptyList() = ArrayList<NewsCriteria>()
 
     @Provides
     fun provideTopHeadLineAdapter() = TopHeadLineAdapter(ArrayList())
-
-    @Provides
-    fun provideLanguageListViewModel() = LanguageListViewModel()
-
 
 }

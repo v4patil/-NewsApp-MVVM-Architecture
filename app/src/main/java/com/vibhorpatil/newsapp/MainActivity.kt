@@ -2,17 +2,14 @@ package com.vibhorpatil.newsapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.vibhorpatil.newsapp.databinding.ActivityMainBinding
-import com.vibhorpatil.newsapp.ui.country.CountryListActivity
-import com.vibhorpatil.newsapp.ui.language.LanguageListActivity
+import com.vibhorpatil.newsapp.ui.newscriteria.NewsCriteriaActivity
 import com.vibhorpatil.newsapp.ui.newssource.NewsSourceActivity
 import com.vibhorpatil.newsapp.ui.search.SearchActivity
 import com.vibhorpatil.newsapp.ui.topheadline.TopHeadlineActivity
+import com.vibhorpatil.newsapp.utils.AppConstant.BY_COUNTRY
+import com.vibhorpatil.newsapp.utils.AppConstant.BY_LANGUAGE
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,8 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun addClickListener() {
         activityMainBinding.btnTopHeadline.setOnClickListener {
-            val intent = Intent(this, TopHeadlineActivity::class.java);
-            startActivity(intent)
+            startActivity(TopHeadlineActivity.getIntent(this))
         }
 
         activityMainBinding.btnNewsSource.setOnClickListener {
@@ -38,13 +34,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         activityMainBinding.btnCountries.setOnClickListener {
-            val intent = Intent(this, CountryListActivity::class.java);
-            startActivity(intent)
+            startActivity(NewsCriteriaActivity.getIntent(this, BY_COUNTRY))
         }
 
         activityMainBinding.btnLanguages.setOnClickListener {
-            val intent = Intent(this, LanguageListActivity::class.java);
-            startActivity(intent)
+            startActivity(NewsCriteriaActivity.getIntent(this, BY_LANGUAGE))
         }
 
         activityMainBinding.btnSearch.setOnClickListener {

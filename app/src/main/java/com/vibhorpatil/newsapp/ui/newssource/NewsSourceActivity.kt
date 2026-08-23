@@ -81,9 +81,7 @@ class NewsSourceActivity : AppCompatActivity() {
 
     private fun setupClickListener() {
         adapter.setOnCountryClickListener { newsSource ->
-            val intent = Intent(this, TopHeadlineActivity::class.java)
-            intent.putExtra("source_id", newsSource.sourceName)
-            startActivity(intent)
+            startActivity(TopHeadlineActivity.getIntent(this, sourceId = newsSource.sourceName))
         }
     }
 

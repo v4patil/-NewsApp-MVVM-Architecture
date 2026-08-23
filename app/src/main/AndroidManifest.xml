@@ -16,13 +16,10 @@
         android:theme="@style/Theme.NewsApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.newscriteria.NewsCriteriaActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.search.SearchActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.language.LanguageListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.country.CountryListActivity"
             android:exported="false" />
         <activity
             android:name=".ui.newssource.NewsSourceActivity"
