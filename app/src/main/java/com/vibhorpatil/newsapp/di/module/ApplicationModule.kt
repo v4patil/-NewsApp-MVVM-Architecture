@@ -3,6 +3,8 @@ package com.vibhorpatil.newsapp.di.module
 import android.content.Context
 import com.vibhorpatil.newsapp.NewsApplication
 import com.vibhorpatil.newsapp.data.api.NetworkService
+import com.vibhorpatil.newsapp.data.interceptor.CacheInterceptor
+import com.vibhorpatil.newsapp.data.interceptor.ForceCacheInterceptor
 import com.vibhorpatil.newsapp.data.repository.NewsRepositoryImpl
 import com.vibhorpatil.newsapp.domain.repository.NewsRepository
 import com.vibhorpatil.newsapp.utils.WebServiceConstant.BASE_URL
@@ -36,6 +38,7 @@ class ApplicationModule(private val application: NewsApplication) {
     @Provides
     fun provideNetworkService(
         @BaseURL baseUrl: String,
+        @ApplicationContext context: Context,
         gsonConverterFactory: GsonConverterFactory
     ): NetworkService {
 
@@ -45,8 +48,15 @@ class ApplicationModule(private val application: NewsApplication) {
         }
 
         // 2. Create OkHttpClient with logging interceptor
+        /**OkHttp is designed in such a way that it returns the cached response only when the Internet is available.
+
+        It returns the data from the cache only when the Internet is available and the data is cached.
+        It returns with the error "no internet available" even when the data is cached and but the Internet is not available.
+         **/
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(logging)
+            .addNetworkInterceptor(CacheInterceptor())
+            .addInterceptor(ForceCacheInterceptor(context))
             .build()
 
         // 3. Build Retrofit with OkHttpClient
