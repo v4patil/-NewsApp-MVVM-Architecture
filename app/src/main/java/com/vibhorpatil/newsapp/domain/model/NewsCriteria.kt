@@ -1,4 +1,4 @@
-package com.vibhorpatil.newsapp.data.model
+package com.vibhorpatil.newsapp.domain.model
 
 data class NewsCriteria(
     val id: String,

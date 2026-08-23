@@ -2,7 +2,7 @@ package com.vibhorpatil.newsapp.ui.newscriteria
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vibhorpatil.newsapp.data.model.NewsCriteria
+import com.vibhorpatil.newsapp.domain.model.NewsCriteria
 import com.vibhorpatil.newsapp.domain.repository.NewsRepository
 import com.vibhorpatil.newsapp.ui.base.UiState
 import com.vibhorpatil.newsapp.utils.AppConstant.BY_COUNTRY

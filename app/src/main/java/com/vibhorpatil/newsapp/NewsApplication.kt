@@ -20,3 +20,43 @@ class NewsApplication: Application() {
             .build()
     }
 }
+
+//cd app/src/main/java/com/vibhorpatil/newsapp
+//tree /F /A
+
+/*
+com.vibhorpatil.newsapp
+│
+├── data
+│   ├── api
+│   │   └── NetworkService.kt
+│   ├── interceptor
+│   │   ├── CacheInterceptor.kt
+│   │   └── ForceCacheInterceptor.kt
+│   ├── model
+│   │   ├── ArticleDto.kt
+│   │   ├── NewsSourceDto.kt
+│   │   └── ...
+│   └── repository
+│       └── NewsRepositoryImpl.kt
+│
+├── domain
+│   ├── model
+│   │   ├── Article.kt
+│   │   ├── NewsCriteria.kt
+│   │   └── NewsSource.kt
+│   └── repository
+│       └── NewsRepository.kt
+│
+├── ui
+│   ├── base
+│   ├── search
+│   ├── newscriteria
+│   └── topheadline
+│
+├── di
+│   ├── component
+│   └── module
+│
+└── utils
+ */

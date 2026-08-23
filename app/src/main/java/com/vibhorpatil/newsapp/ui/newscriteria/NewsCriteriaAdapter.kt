@@ -3,7 +3,7 @@ package com.vibhorpatil.newsapp.ui.newscriteria
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.vibhorpatil.newsapp.data.model.NewsCriteria
+import com.vibhorpatil.newsapp.domain.model.NewsCriteria
 import com.vibhorpatil.newsapp.databinding.ItemNewsCriteriaBinding
 import com.vibhorpatil.newsapp.di.module.ActivityScope
 import javax.inject.Inject
