@@ -5,11 +5,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.vibhorpatil.newsapp.databinding.ActivityMainBinding
 import com.vibhorpatil.newsapp.ui.newscriteria.NewsCriteriaActivity
-import com.vibhorpatil.newsapp.ui.newssource.NewsSourceActivity
 import com.vibhorpatil.newsapp.ui.search.SearchActivity
 import com.vibhorpatil.newsapp.ui.topheadline.TopHeadlineActivity
 import com.vibhorpatil.newsapp.utils.AppConstant.BY_COUNTRY
 import com.vibhorpatil.newsapp.utils.AppConstant.BY_LANGUAGE
+import com.vibhorpatil.newsapp.utils.AppConstant.BY_SOURCE
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         activityMainBinding.btnNewsSource.setOnClickListener {
-            val intent = Intent(this, NewsSourceActivity::class.java);
-            startActivity(intent)
+            startActivity(NewsCriteriaActivity.getIntent(this, BY_SOURCE))
+
         }
 
         activityMainBinding.btnCountries.setOnClickListener {

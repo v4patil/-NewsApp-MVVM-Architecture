@@ -6,11 +6,13 @@ import com.vibhorpatil.newsapp.data.model.NewsCriteria
 import com.vibhorpatil.newsapp.data.repository.NewsSourceRepository
 import com.vibhorpatil.newsapp.ui.base.UiState
 import com.vibhorpatil.newsapp.utils.AppConstant.BY_COUNTRY
+import com.vibhorpatil.newsapp.utils.AppConstant.BY_SOURCE
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,6 +31,19 @@ class NewsCriteriaViewModel @Inject constructor(
             viewModelScope.launch {
                 val countryList = createAndReturnCountryList()
                 countryList.catch {
+                    _uiState.value = UiState.Error(it.toString())
+                }.collect {
+                    _uiState.value = UiState.Success(it)
+                }
+            }
+        } else if (filterBy == BY_SOURCE) {
+            viewModelScope.launch {
+                val countryList = newsSourceRepository.getNewsSources()
+                countryList.map { newsSourceList ->
+                    newsSourceList.map {
+                        NewsCriteria(it.sourceName, it.sourceName)
+                    }
+                }.catch {
                     _uiState.value = UiState.Error(it.toString())
                 }.collect {
                     _uiState.value = UiState.Success(it)
