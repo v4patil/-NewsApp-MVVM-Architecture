@@ -6,8 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.vibhorpatil.newsapp.data.model.Article
 import com.vibhorpatil.newsapp.data.model.NewsCriteria
 import com.vibhorpatil.newsapp.data.model.NewsSource
-import com.vibhorpatil.newsapp.data.repository.NewsSourceRepository
-import com.vibhorpatil.newsapp.data.repository.TopHeadLineRepository
+import com.vibhorpatil.newsapp.domain.repository.NewsRepository
 import com.vibhorpatil.newsapp.ui.base.ViewModelProviderFactory
 import com.vibhorpatil.newsapp.ui.newscriteria.NewsCriteriaViewModel
 import com.vibhorpatil.newsapp.ui.topheadline.TopHeadLineAdapter
@@ -25,22 +24,22 @@ class ActivityModule(private val activity: AppCompatActivity ) {
     }
 
     @Provides
-    fun provideTopHeadLineViewModel(topHeadLineRepository: TopHeadLineRepository) : TopHeadLineViewmodel{
+    fun provideTopHeadLineViewModel(newsRepository: NewsRepository) : TopHeadLineViewmodel{
         return ViewModelProvider(
             activity,
             ViewModelProviderFactory(TopHeadLineViewmodel::class){
-                TopHeadLineViewmodel(topHeadLineRepository)
+                TopHeadLineViewmodel(newsRepository)
             }
         )[TopHeadLineViewmodel::class.java]
 
     }
 
     @Provides
-    fun provideNewsCriteriaViewModel(newsSourceRepository: NewsSourceRepository) : NewsCriteriaViewModel {
+    fun provideNewsCriteriaViewModel(newsRepository: NewsRepository) : NewsCriteriaViewModel {
         return ViewModelProvider(
             activity,
             ViewModelProviderFactory(NewsCriteriaViewModel::class){
-                NewsCriteriaViewModel(newsSourceRepository)
+                NewsCriteriaViewModel(newsRepository)
             }
         )[NewsCriteriaViewModel::class.java]
     }

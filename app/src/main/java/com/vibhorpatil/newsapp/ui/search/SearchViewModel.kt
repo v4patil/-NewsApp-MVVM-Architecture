@@ -3,8 +3,8 @@ package com.vibhorpatil.newsapp.ui.search
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vibhorpatil.newsapp.data.model.Article
-import com.vibhorpatil.newsapp.data.repository.TopHeadLineRepository
 import com.vibhorpatil.newsapp.di.module.ActivityScope
+import com.vibhorpatil.newsapp.domain.repository.NewsRepository
 import com.vibhorpatil.newsapp.ui.base.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @ActivityScope
-class SearchViewModel @Inject constructor(private val repository: TopHeadLineRepository) :
+class SearchViewModel @Inject constructor(private val repository: NewsRepository) :
     ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState<List<Article>>>(UiState.Loading)

@@ -3,7 +3,7 @@ package com.vibhorpatil.newsapp.ui.newscriteria
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vibhorpatil.newsapp.data.model.NewsCriteria
-import com.vibhorpatil.newsapp.data.repository.NewsSourceRepository
+import com.vibhorpatil.newsapp.domain.repository.NewsRepository
 import com.vibhorpatil.newsapp.ui.base.UiState
 import com.vibhorpatil.newsapp.utils.AppConstant.BY_COUNTRY
 import com.vibhorpatil.newsapp.utils.AppConstant.BY_LANGUAGE
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 
 class NewsCriteriaViewModel @Inject constructor(
-    private val newsSourceRepository: NewsSourceRepository
+    private val newsRepositoryImpl: NewsRepository
 ) :
     ViewModel() {
 
@@ -31,35 +31,39 @@ class NewsCriteriaViewModel @Inject constructor(
 
     fun getData(filterBy: Int) {
         this.filterBy = filterBy
-        if (filterBy == BY_COUNTRY) {
-            viewModelScope.launch {
-                val countryList = createAndReturnCountryList()
-                countryList.catch {
-                    _uiState.value = UiState.Error(it.toString())
-                }.collect {
-                    _uiState.value = UiState.Success(it)
-                }
-            }
-        } else if (filterBy == BY_SOURCE) {
-            viewModelScope.launch {
-                val countryList = newsSourceRepository.getNewsSources()
-                countryList.map { newsSourceList ->
-                    newsSourceList.map {
-                        NewsCriteria(it.id, it.sourceName)
+        when (filterBy) {
+            BY_COUNTRY -> {
+                viewModelScope.launch {
+                    val countryList = createAndReturnCountryList()
+                    countryList.catch {
+                        _uiState.value = UiState.Error(it.toString())
+                    }.collect {
+                        _uiState.value = UiState.Success(it)
                     }
-                }.catch {
-                    _uiState.value = UiState.Error(it.toString())
-                }.collect {
-                    _uiState.value = UiState.Success(it)
                 }
             }
-        } else {
-            viewModelScope.launch {
-                val languageList = createAndReturnLanguageList()
-                languageList.catch {
-                    _uiState.value = UiState.Error(it.toString())
-                }.collect {
-                    _uiState.value = UiState.Success(it)
+            BY_SOURCE -> {
+                viewModelScope.launch {
+                    val countryList = newsRepositoryImpl.getNewsSources()
+                    countryList.map { newsSourceList ->
+                        newsSourceList.map {
+                            NewsCriteria(it.id, it.sourceName)
+                        }
+                    }.catch {
+                        _uiState.value = UiState.Error(it.toString())
+                    }.collect {
+                        _uiState.value = UiState.Success(it)
+                    }
+                }
+            }
+            else -> {
+                viewModelScope.launch {
+                    val languageList = createAndReturnLanguageList()
+                    languageList.catch {
+                        _uiState.value = UiState.Error(it.toString())
+                    }.collect {
+                        _uiState.value = UiState.Success(it)
+                    }
                 }
             }
         }

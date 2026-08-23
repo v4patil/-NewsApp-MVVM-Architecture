@@ -3,6 +3,8 @@ package com.vibhorpatil.newsapp.di.module
 import android.content.Context
 import com.vibhorpatil.newsapp.NewsApplication
 import com.vibhorpatil.newsapp.data.api.NetworkService
+import com.vibhorpatil.newsapp.data.repository.NewsRepositoryImpl
+import com.vibhorpatil.newsapp.domain.repository.NewsRepository
 import com.vibhorpatil.newsapp.utils.WebServiceConstant.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -54,6 +56,12 @@ class ApplicationModule(private val application: NewsApplication) {
             .client(okHttpClient)
             .build()
             .create(NetworkService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideNewsRepository(networkService: NetworkService) : NewsRepository {
+        return NewsRepositoryImpl(networkService)
     }
 
 }
