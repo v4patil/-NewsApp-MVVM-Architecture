@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vibhorpatil.newsapp.data.model.NewsCriteria
-import com.vibhorpatil.newsapp.databinding.ItemNewsSourceBinding
+import com.vibhorpatil.newsapp.databinding.ItemNewsCriteriaBinding
 import com.vibhorpatil.newsapp.di.module.ActivityScope
 import javax.inject.Inject
 
@@ -23,7 +23,7 @@ class NewsCriteriaAdapter @Inject constructor(
         parent: ViewGroup, viewType: Int
     ): NewsCriteriaViewHolder {
         return NewsCriteriaViewHolder(
-            ItemNewsSourceBinding
+            ItemNewsCriteriaBinding
                 .inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
@@ -38,7 +38,7 @@ class NewsCriteriaAdapter @Inject constructor(
         this.list.addAll(list)
     }
 
-    class NewsCriteriaViewHolder(private val binding: ItemNewsSourceBinding) :
+    class NewsCriteriaViewHolder(private val binding: ItemNewsCriteriaBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(newsCriteria: NewsCriteria, listener: ((NewsCriteria) -> Unit)?) {

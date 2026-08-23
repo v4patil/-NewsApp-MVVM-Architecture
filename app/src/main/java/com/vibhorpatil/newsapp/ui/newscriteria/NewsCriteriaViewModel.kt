@@ -6,6 +6,7 @@ import com.vibhorpatil.newsapp.data.model.NewsCriteria
 import com.vibhorpatil.newsapp.data.repository.NewsSourceRepository
 import com.vibhorpatil.newsapp.ui.base.UiState
 import com.vibhorpatil.newsapp.utils.AppConstant.BY_COUNTRY
+import com.vibhorpatil.newsapp.utils.AppConstant.BY_LANGUAGE
 import com.vibhorpatil.newsapp.utils.AppConstant.BY_SOURCE
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,11 +23,14 @@ class NewsCriteriaViewModel @Inject constructor(
 ) :
     ViewModel() {
 
+    var filterBy: Int = BY_LANGUAGE
+
     private var _uiState = MutableStateFlow<UiState<List<NewsCriteria>>>(UiState.Loading)
 
     val uiState: StateFlow<UiState<List<NewsCriteria>>> = _uiState
 
     fun getData(filterBy: Int) {
+        this.filterBy = filterBy
         if (filterBy == BY_COUNTRY) {
             viewModelScope.launch {
                 val countryList = createAndReturnCountryList()

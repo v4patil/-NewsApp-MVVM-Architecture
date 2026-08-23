@@ -15,6 +15,9 @@ import com.vibhorpatil.newsapp.di.component.DaggerActivityComponent
 import com.vibhorpatil.newsapp.di.module.ActivityModule
 import com.vibhorpatil.newsapp.ui.base.UiState
 import com.vibhorpatil.newsapp.ui.topheadline.TopHeadlineActivity
+import com.vibhorpatil.newsapp.utils.AppConstant.BY_COUNTRY
+import com.vibhorpatil.newsapp.utils.AppConstant.BY_LANGUAGE
+import com.vibhorpatil.newsapp.utils.AppConstant.BY_SOURCE
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -94,8 +97,20 @@ class NewsCriteriaActivity : AppCompatActivity() {
     }
 
     private fun setupClickListener() {
-        adapter.setOnItemClickListener {newsCriteria ->
-            startActivity(TopHeadlineActivity.getIntent(this, languageId = newsCriteria.id))
+        adapter.setOnItemClickListener { newsCriteria ->
+            when (viewModel.filterBy) {
+                BY_COUNTRY -> {
+                    startActivity(TopHeadlineActivity.getIntent(this, countryId = newsCriteria.id))
+                }
+
+                BY_LANGUAGE -> {
+                    startActivity(TopHeadlineActivity.getIntent(this, languageId = newsCriteria.id))
+                }
+
+                BY_SOURCE -> {
+                    startActivity(TopHeadlineActivity.getIntent(this, sourceId = newsCriteria.id))
+                }
+            }
         }
     }
 
