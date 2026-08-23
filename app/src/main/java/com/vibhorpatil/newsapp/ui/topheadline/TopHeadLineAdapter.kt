@@ -37,7 +37,7 @@ class TopHeadLineAdapter @Inject constructor(private val articleList: ArrayList<
             fun bind(article: Article){
                 binding.tvTitle.text = article.title
                 binding.tvDescription.text = article.description
-                binding.tvSource.text = article.source.name
+                binding.tvSource.text = article.source.sourceName
                 Glide.with(binding.ivBanner.context)
                     .load(article.imageUrl)
                     .into(binding.ivBanner)

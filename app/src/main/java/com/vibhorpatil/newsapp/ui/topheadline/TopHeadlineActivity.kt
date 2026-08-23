@@ -22,8 +22,8 @@ import com.vibhorpatil.newsapp.ui.topheadline.TopHeadlineActivity.Companion.EXTR
 import com.vibhorpatil.newsapp.ui.topheadline.TopHeadlineActivity.Companion.EXTRA_SOURCE_ID
 import com.vibhorpatil.newsapp.utils.AppConstant.COUNTRY
 import kotlinx.coroutines.launch
-import java.util.ArrayList
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class TopHeadlineActivity : AppCompatActivity() {
 
@@ -113,16 +113,23 @@ class TopHeadlineActivity : AppCompatActivity() {
                 topHeadLineViewmodel.uiState.collect{
                     when(it){
                         is UiState.Success -> {
-                            binding.progressBar.visibility = View.GONE
                             binding.recyclerView.visibility = View.VISIBLE
-
-                            renderList(ArrayList(it.data))
+                            binding.progressBar.visibility = View.GONE
+                            binding.tvEmpty.visibility = View.GONE
+                            if (it.data.isEmpty()) {
+                                binding.tvEmpty.visibility = View.VISIBLE
+                                binding.recyclerView.visibility = View.GONE
+                            } else {
+                                renderList(ArrayList(it.data))
+                            }
                         }
                         is UiState.Loading -> {
                             binding.progressBar.visibility = View.VISIBLE
                             binding.recyclerView.visibility = View.GONE
+                            binding.tvEmpty.visibility = View.GONE
                         }
                         is UiState.Error -> {
+                            binding.tvEmpty.visibility = View.VISIBLE
                             binding.progressBar.visibility = View.GONE
                             Toast.makeText(this@TopHeadlineActivity, it.errorMessage, Toast.LENGTH_SHORT).show()
                         }

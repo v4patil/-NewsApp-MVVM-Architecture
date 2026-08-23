@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    tools:context=".ui.newssource.NewsSourceActivity">
+    tools:context=".ui.newscriteria.NewsCriteriaActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvList"
@@ -25,9 +25,9 @@
 
     <TextView
         android:id="@+id/tvEmpty"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nothing to show"
+        android:text="No Source found"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

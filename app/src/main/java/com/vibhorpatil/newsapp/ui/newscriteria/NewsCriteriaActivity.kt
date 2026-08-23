@@ -88,7 +88,12 @@ class NewsCriteriaActivity : AppCompatActivity() {
                             binding.tvEmpty.visibility = View.GONE
                             binding.rvList.visibility = View.VISIBLE
 
-                            adapter.setData(it.data)
+                            if (it.data.isEmpty()) {
+                                binding.tvEmpty.visibility = View.VISIBLE
+                                binding.rvList.visibility = View.GONE
+                            } else {
+                                adapter.setData(it.data)
+                            }
                         }
                     }
                 }

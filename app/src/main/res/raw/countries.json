@@ -1,0 +1,174 @@
+[
+  {
+    "id": "ar",
+    "value": "Argentina"
+  },
+  {
+    "id": "au",
+    "value": "Australia"
+  },
+  {
+    "id": "at",
+    "value": "Austria"
+  },
+  {
+    "id": "be",
+    "value": "Belgium"
+  },
+  {
+    "id": "br",
+    "value": "Brazil"
+  },
+  {
+    "id": "bg",
+    "value": "Bulgaria"
+  },
+  {
+    "id": "ca",
+    "value": "Canada"
+  },
+  {
+    "id": "cn",
+    "value": "China"
+  },
+  {
+    "id": "co",
+    "value": "Colombia"
+  },
+  {
+    "id": "cu",
+    "value": "Cuba"
+  },
+  {
+    "id": "cz",
+    "value": "Czech Republic"
+  },
+  {
+    "id": "eg",
+    "value": "Egypt"
+  },
+  {
+    "id": "fr",
+    "value": "France"
+  },
+  {
+    "id": "de",
+    "value": "Germany"
+  },
+  {
+    "id": "gr",
+    "value": "Greece"
+  },
+  {
+    "id": "hk",
+    "value": "Hong Kong"
+  },
+  {
+    "id": "hu",
+    "value": "Hungary"
+  },
+  {
+    "id": "in",
+    "value": "India"
+  },
+  {
+    "id": "id",
+    "value": "Indonesia"
+  },
+  {
+    "id": "ie",
+    "value": "Ireland"
+  },
+  {
+    "id": "il",
+    "value": "Israel"
+  },
+  {
+    "id": "it",
+    "value": "Italy"
+  },
+  {
+    "id": "jp",
+    "value": "Japan"
+  },
+  {
+    "id": "lv",
+    "value": "Latvia"
+  },
+  {
+    "id": "lt",
+    "value": "Lithuania"
+  },
+  {
+    "id": "my",
+    "value": "Malaysia"
+  },
+  {
+    "id": "mx",
+    "value": "Mexico"
+  },
+  {
+    "id": "ma",
+    "value": "Morocco"
+  },
+  {
+    "id": "nl",
+    "value": "Netherlands"
+  },
+  {
+    "id": "nz",
+    "value": "New Zealand"
+  },
+  {
+    "id": "ng",
+    "value": "Nigeria"
+  },
+  {
+    "id": "no",
+    "value": "Norway"
+  },
+  {
+    "id": "ph",
+    "value": "Philippines"
+  },
+  {
+    "id": "pl",
+    "value": "Poland"
+  },
+  {
+    "id": "pt",
+    "value": "Portugal"
+  },
+  {
+    "id": "ro",
+    "value": "Romania"
+  },
+  {
+    "id": "ru",
+    "value": "Russia"
+  },
+  {
+    "id": "sa",
+    "value": "Saudi Arabia"
+  },
+  {
+    "id": "rs",
+    "value": "Serbia"
+  },
+  {
+    "id": "sg",
+    "value": "Singapore"
+  },
+  {
+    "id": "sk",
+    "value": "Slovakia"
+  },
+  {
+    "id": "si",
+    "value": "Slovenia"
+  },
+  {
+    "id": "us",
+    "value": "United States"
+  }
+]

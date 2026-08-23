@@ -2,7 +2,6 @@ package com.vibhorpatil.newsapp.ui.search
 
 import android.os.Bundle
 import android.view.View
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
@@ -16,6 +15,7 @@ import com.vibhorpatil.newsapp.databinding.ActivitySearchBinding
 import com.vibhorpatil.newsapp.di.component.DaggerActivityComponent
 import com.vibhorpatil.newsapp.di.module.ActivityModule
 import com.vibhorpatil.newsapp.ui.base.UiState
+import com.vibhorpatil.newsapp.ui.base.getQueryTextChangeStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -37,6 +37,7 @@ class SearchActivity : AppCompatActivity() {
         setupUI()
         setupObserver()
         setListener()
+        setUpQuerySearchStateFlow()
     }
 
     private fun injectDependencies() {
@@ -62,22 +63,33 @@ class SearchActivity : AppCompatActivity() {
 
     private fun setupObserver() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                searchViewModel.uiState.collect{
-                    when(it){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                searchViewModel.uiState.collect {
+                    when (it) {
                         is UiState.Success -> {
                             binding.progressBar.visibility = View.GONE
                             binding.recyclerView.visibility = View.VISIBLE
+                            binding.tvEmpty.visibility = View.GONE
 
-                            renderList(ArrayList(it.data))
+                            if (it.data.isEmpty()) {
+                                binding.tvEmpty.visibility = View.VISIBLE
+                                binding.recyclerView.visibility = View.GONE
+                            } else {
+                                renderList(ArrayList(it.data))
+                            }
                         }
+
                         is UiState.Loading -> {
                             binding.progressBar.visibility = View.VISIBLE
                             binding.recyclerView.visibility = View.GONE
+                            binding.tvEmpty.visibility = View.GONE
                         }
+
                         is UiState.Error -> {
+                            binding.tvEmpty.visibility = View.VISIBLE
                             binding.progressBar.visibility = View.GONE
-                            Toast.makeText(this@SearchActivity, it.errorMessage, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@SearchActivity, it.errorMessage, Toast.LENGTH_SHORT)
+                                .show()
                         }
                     }
                 }
@@ -85,7 +97,7 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun renderList(articleList: ArrayList<Article>){
+    private fun renderList(articleList: ArrayList<Article>) {
         adapter.addData(articleList)
     }
 
@@ -95,19 +107,17 @@ class SearchActivity : AppCompatActivity() {
             requestFocus()
 
             setQueryHint("Search news")
+        }
+    }
 
-            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    query?.let {
-                        searchViewModel.searchBy(it)
+    private fun setUpQuerySearchStateFlow() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                binding.svSearchNews.getQueryTextChangeStateFlow()
+                    .collect { query ->
+                        searchViewModel.searchBy(query)
                     }
-                    return true
-                }
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    return true
-                }
-            })
+            }
         }
     }
 

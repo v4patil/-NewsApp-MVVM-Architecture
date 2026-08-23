@@ -35,11 +35,11 @@ class ActivityModule(private val activity: AppCompatActivity ) {
     }
 
     @Provides
-    fun provideNewsCriteriaViewModel(newsRepository: NewsRepository) : NewsCriteriaViewModel {
+    fun provideNewsCriteriaViewModel(@ApplicationContext context: Context, newsRepository: NewsRepository) : NewsCriteriaViewModel {
         return ViewModelProvider(
             activity,
             ViewModelProviderFactory(NewsCriteriaViewModel::class){
-                NewsCriteriaViewModel(newsRepository)
+                NewsCriteriaViewModel(context,newsRepository)
             }
         )[NewsCriteriaViewModel::class.java]
     }
