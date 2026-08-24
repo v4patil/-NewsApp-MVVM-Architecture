@@ -10,7 +10,9 @@ import com.vibhorpatil.newsapp.ui.topheadline.TopHeadlineActivity
 import com.vibhorpatil.newsapp.utils.AppConstant.BY_COUNTRY
 import com.vibhorpatil.newsapp.utils.AppConstant.BY_LANGUAGE
 import com.vibhorpatil.newsapp.utils.AppConstant.BY_SOURCE
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var activityMainBinding: ActivityMainBinding
