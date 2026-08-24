@@ -6,13 +6,14 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.vibhorpatil.newsapp.R
-import com.vibhorpatil.newsapp.di.module.ApplicationContext
 import com.vibhorpatil.newsapp.domain.model.NewsCriteria
 import com.vibhorpatil.newsapp.domain.repository.NewsRepository
 import com.vibhorpatil.newsapp.ui.base.UiState
 import com.vibhorpatil.newsapp.utils.AppConstant.BY_COUNTRY
 import com.vibhorpatil.newsapp.utils.AppConstant.BY_LANGUAGE
 import com.vibhorpatil.newsapp.utils.AppConstant.BY_SOURCE
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,12 +23,11 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
+@HiltViewModel
 class NewsCriteriaViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
     private val newsRepositoryImpl: NewsRepository
-) :
-    ViewModel() {
+) : ViewModel() {
 
     var filterBy: Int = BY_LANGUAGE
 

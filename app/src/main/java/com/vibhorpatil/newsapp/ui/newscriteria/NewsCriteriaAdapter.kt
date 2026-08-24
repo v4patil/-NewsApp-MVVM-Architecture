@@ -5,12 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vibhorpatil.newsapp.domain.model.NewsCriteria
 import com.vibhorpatil.newsapp.databinding.ItemNewsCriteriaBinding
-import com.vibhorpatil.newsapp.di.module.ActivityScope
 import javax.inject.Inject
+import javax.inject.Named
 
-@ActivityScope
 class NewsCriteriaAdapter @Inject constructor(
-    private val list: ArrayList<NewsCriteria>
+    @Named("newsCriteriaList")  private val list: ArrayList<NewsCriteria>
 ) : RecyclerView.Adapter<NewsCriteriaAdapter.NewsCriteriaViewHolder>() {
 
     private var listener: ((NewsCriteria) -> Unit)? = null
