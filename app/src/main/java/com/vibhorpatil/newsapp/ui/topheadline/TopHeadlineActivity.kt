@@ -5,30 +5,25 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.vibhorpatil.newsapp.NewsApplication
 import com.vibhorpatil.newsapp.data.model.Article
 import com.vibhorpatil.newsapp.databinding.ActivityTopHeadlineBinding
-import com.vibhorpatil.newsapp.di.component.DaggerActivityComponent
-import com.vibhorpatil.newsapp.di.module.ActivityModule
 import com.vibhorpatil.newsapp.ui.base.UiState
-import com.vibhorpatil.newsapp.ui.topheadline.TopHeadlineActivity.Companion.EXTRA_COUNTRY_CODE
-import com.vibhorpatil.newsapp.ui.topheadline.TopHeadlineActivity.Companion.EXTRA_LANGUAGE_ID
-import com.vibhorpatil.newsapp.ui.topheadline.TopHeadlineActivity.Companion.EXTRA_SOURCE_ID
 import com.vibhorpatil.newsapp.utils.AppConstant.COUNTRY
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
+@AndroidEntryPoint
 class TopHeadlineActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var topHeadLineViewmodel: TopHeadLineViewmodel
+    private val topHeadLineViewmodel: TopHeadLineViewmodel by viewModels()
 
     @Inject
     lateinit var adapter: TopHeadLineAdapter
@@ -53,22 +48,12 @@ class TopHeadlineActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        injectDependencies()
         super.onCreate(savedInstanceState)
         binding = ActivityTopHeadlineBinding.inflate(layoutInflater)
         setContentView(binding.root)
         getIntentData()
         setupUI()
         setupObserver()
-    }
-
-    private fun injectDependencies(){
-        DaggerActivityComponent
-            .builder()
-            .applicationComponent((application as NewsApplication).applicationComponent)
-            .activityModule(ActivityModule(this))
-            .build()
-            .inject(this)
     }
 
     private fun getIntentData() {

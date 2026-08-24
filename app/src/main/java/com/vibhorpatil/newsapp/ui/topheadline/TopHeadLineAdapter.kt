@@ -9,9 +9,10 @@ import com.vibhorpatil.newsapp.data.model.Article
 import com.vibhorpatil.newsapp.databinding.TopHeadlineItemLayoutBinding
 import androidx.browser.customtabs.CustomTabsIntent
 import javax.inject.Inject
+import javax.inject.Named
 
-
-class TopHeadLineAdapter @Inject constructor(private val articleList: ArrayList<Article>)
+class TopHeadLineAdapter @Inject constructor(
+    @Named("articleList")  private val articleList: ArrayList<Article>)
     : RecyclerView.Adapter<TopHeadLineAdapter.TopHeadLineViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopHeadLineViewHolder {
