@@ -3,9 +3,9 @@ package com.vibhorpatil.newsapp.ui.search
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vibhorpatil.newsapp.data.model.Article
-import com.vibhorpatil.newsapp.di.module.ActivityScope
 import com.vibhorpatil.newsapp.domain.repository.NewsRepository
 import com.vibhorpatil.newsapp.ui.base.UiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
-@ActivityScope
+@HiltViewModel
 class SearchViewModel @Inject constructor(private val repository: NewsRepository) :
     ViewModel() {
 

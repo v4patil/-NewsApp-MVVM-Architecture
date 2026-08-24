@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.vibhorpatil.newsapp.data.model.Article
 import com.vibhorpatil.newsapp.databinding.TopHeadlineItemLayoutBinding
-import com.vibhorpatil.newsapp.di.module.ActivityScope
 import javax.inject.Inject
+import javax.inject.Named
 
-@ActivityScope
-class SearchAdapter @Inject constructor(private val articleList: ArrayList<Article>)
-    : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
+class SearchAdapter @Inject constructor(
+    @Named("articleList") private val articleList: ArrayList<Article>
+) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         return SearchViewHolder(
