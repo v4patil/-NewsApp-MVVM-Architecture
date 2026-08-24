@@ -1,7 +1,6 @@
 package com.vibhorpatil.newsapp.di.module
 
 import android.content.Context
-import com.vibhorpatil.newsapp.NewsApplication
 import com.vibhorpatil.newsapp.data.api.NetworkService
 import com.vibhorpatil.newsapp.data.interceptor.CacheInterceptor
 import com.vibhorpatil.newsapp.data.interceptor.ForceCacheInterceptor
@@ -10,6 +9,9 @@ import com.vibhorpatil.newsapp.domain.repository.NewsRepository
 import com.vibhorpatil.newsapp.utils.WebServiceConstant.BASE_URL
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,13 +19,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-class ApplicationModule(private val application: NewsApplication) {
-
-    @ApplicationContext
-    @Provides
-    fun provideContext(): Context {
-        return application
-    }
+@InstallIn(SingletonComponent::class)
+object ApplicationModule {
 
     @BaseURL // To distinguish between the object having same return type
     @Provides
