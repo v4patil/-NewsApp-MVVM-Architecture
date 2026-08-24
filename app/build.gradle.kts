@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.devtools.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -58,9 +59,12 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.lifecycle.livedata.ktx)
-    implementation(libs.dagger)
-    ksp(libs.dagger.compiler)
+    implementation(libs.androidx.activity.ktx)
 
     implementation(libs.browser)//for open the web page when clicked on the itemView
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+
 
 }
