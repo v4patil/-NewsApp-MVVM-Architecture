@@ -8,7 +8,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -29,20 +28,23 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.vibhorpatil.newsapp.domain.model.NewsCriteria
 import com.vibhorpatil.newsapp.ui.base.EmptyScreen
 import com.vibhorpatil.newsapp.ui.base.LoadingScreen
+import com.vibhorpatil.newsapp.ui.base.TopAppBar
 import com.vibhorpatil.newsapp.ui.base.UiState
 
 @Composable
 fun NewsCriteriaRoute(
+    onBack: () -> Unit,
     onItemClick: (NewsCriteria) -> Unit,
     viewModel: NewsCriteriaViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    NewsCriteriaScreen(uiState, onItemClick)
+    NewsCriteriaScreen(onBack, uiState, onItemClick)
 }
 
 @Composable
 private fun NewsCriteriaScreen(
+    onBack: () -> Unit,
     uiState: UiState<List<NewsCriteria>>,
     onItemClick: (NewsCriteria) -> Unit
 ) {
@@ -55,12 +57,15 @@ private fun NewsCriteriaScreen(
     }
 
     Scaffold(
+        topBar = { TopAppBar(onBack, "Filter By") },
         snackbarHost = { SnackbarHost(hostState = snackBarHostState) }
     ) { paddingValues ->
 
         when (val state = uiState) {
             is UiState.Loading -> {
-                LoadingScreen(modifier = Modifier.padding(paddingValues).fillMaxSize())
+                LoadingScreen(modifier = Modifier
+                    .padding(paddingValues)
+                    .fillMaxSize())
             }
 
             is UiState.Error -> {}

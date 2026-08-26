@@ -32,8 +32,9 @@ class NewsCriteriaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            NewsCriteriaRoute({newsCriteria ->
-                navigateTo(newsCriteria) })
+            NewsCriteriaRoute({ finish() }, { newsCriteria ->
+                navigateTo(newsCriteria)
+            })
         }
         getIntentData()
     }

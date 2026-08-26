@@ -2,6 +2,7 @@ package com.vibhorpatil.newsapp.ui.base
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -25,7 +26,7 @@ fun TopAppBar(
             IconButton(onClick = { onBack() }
             ) {
                 Icon(
-                    imageVector = Icons.Default.ArrowBack,
+                    imageVector = if(title.equals("News App"))Icons.Default.Home else Icons.Default.ArrowBack,
                     contentDescription = "back Arrow",
                     tint = MaterialTheme.colorScheme.primary
                 )

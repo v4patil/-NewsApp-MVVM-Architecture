@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.vibhorpatil.newsapp.ui.topheadline.TopHeadlineActivity.Companion.EXTRA_LANGUAGE_ID
 import com.vibhorpatil.newsapp.utils.AppConstant.COUNTRY
 import dagger.hilt.android.AndroidEntryPoint
 

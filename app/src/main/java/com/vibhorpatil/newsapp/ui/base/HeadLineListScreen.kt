@@ -26,7 +26,7 @@ fun HeadLineListScreen(
         ) {
             LazyColumn {
                 items(
-                    key = { it.imageUrl },
+                    key = { it.title },
                     items = list
                 ) {
                     ItemNewsArticle(modifier, it, onItemClick)
