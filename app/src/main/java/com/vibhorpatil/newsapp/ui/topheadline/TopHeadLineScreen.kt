@@ -1,62 +1,48 @@
-package com.vibhorpatil.newsapp.ui.search
+package com.vibhorpatil.newsapp.ui.topheadline
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.vibhorpatil.newsapp.data.model.Article
-import com.vibhorpatil.newsapp.ui.base.EmptyScreen
 import com.vibhorpatil.newsapp.ui.base.HeadLineListScreen
-import com.vibhorpatil.newsapp.ui.base.ItemNewsArticle
 import com.vibhorpatil.newsapp.ui.base.LoadingScreen
 import com.vibhorpatil.newsapp.ui.base.TopAppBar
 import com.vibhorpatil.newsapp.ui.base.UiState
 
 @Composable
-fun SearchRoute(
-    onBack: () -> Unit = {},
-    viewModel: SearchViewModel = hiltViewModel()
+fun TopHeadLineRoute(
+    onBack: () -> Unit,
+    viewModel: TopHeadLineViewmodel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    SearchScreen(onBack, uiState, {}, { viewModel.searchBy("tom Hall") })
+    TopHeadLineScreen(onBack, uiState)
 }
 
 @Composable
-private fun SearchScreen(
+fun TopHeadLineScreen(
     onBack: () -> Unit,
     uiState: UiState<List<Article>>,
-    onItemClick: (String) -> Unit,
-    onSearch: (String) -> Unit
+    onItemClick: (String) -> Unit = {}
 ) {
 
     Scaffold(
-        topBar = { TopAppBar(onBack, "Search Screen") }
+        topBar = { TopAppBar(onBack = onBack, "Top Headline") }
     ) { paddingValues ->
 
-        when (val state = uiState) {
+        when (val state = uiState){
             is UiState.Loading -> {
-                LoadingScreen(
-                    modifier = Modifier
-                        .padding(paddingValues)
-                        .fillMaxSize()
-                )
-                onSearch("tomHalland")
+                LoadingScreen(Modifier.padding(paddingValues).fillMaxSize())
             }
-
             is UiState.Error -> {}
             is UiState.Success -> {
                 HeadLineListScreen(Modifier.padding(paddingValues), state.data, onItemClick)
             }
         }
     }
-}
 
+}

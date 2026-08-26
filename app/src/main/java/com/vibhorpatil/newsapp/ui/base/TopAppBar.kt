@@ -16,7 +16,8 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun TopAppBar(
     onBack: () -> Unit = {},
-    title: String = "News App"
+    title: String = "News App",
+    isShowAction: Boolean = false
 ) {
     TopAppBar(
         title = { Text(text = title) },
@@ -31,12 +32,14 @@ fun TopAppBar(
             }
         },
         actions = {
-            IconButton(onClick = {}) {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = "Search",
-                    tint = MaterialTheme.colorScheme.primary
-                )
+            if (isShowAction) {
+                IconButton(onClick = {}) {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = "Search",
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
             }
         }
     )
