@@ -1,114 +1,18 @@
 package com.vibhorpatil.newsapp.ui.search
 
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
-import androidx.activity.viewModels
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.vibhorpatil.newsapp.data.model.Article
-import com.vibhorpatil.newsapp.databinding.ActivitySearchBinding
-import com.vibhorpatil.newsapp.ui.base.UiState
-import com.vibhorpatil.newsapp.ui.base.getQueryTextChangeStateFlow
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySearchBinding
-
-    private val searchViewModel: SearchViewModel by viewModels()
-
-    @Inject
-    lateinit var adapter: SearchAdapter
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySearchBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setupUI()
-        setupObserver()
-        setListener()
-        setUpQuerySearchStateFlow()
-    }
-
-    private fun setupUI() {
-        val recyclerView = binding.recyclerView
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                recyclerView.context,
-                (recyclerView.layoutManager as LinearLayoutManager).orientation
-            )
-        )
-        recyclerView.adapter = adapter
-    }
-
-    private fun setupObserver() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                searchViewModel.uiState.collect {
-                    when (it) {
-                        is UiState.Success -> {
-                            binding.progressBar.visibility = View.GONE
-                            binding.recyclerView.visibility = View.VISIBLE
-                            binding.tvEmpty.visibility = View.GONE
-
-                            if (it.data.isEmpty()) {
-                                binding.tvEmpty.visibility = View.VISIBLE
-                                binding.recyclerView.visibility = View.GONE
-                            } else {
-                                renderList(ArrayList(it.data))
-                            }
-                        }
-
-                        is UiState.Loading -> {
-                            binding.progressBar.visibility = View.VISIBLE
-                            binding.recyclerView.visibility = View.GONE
-                            binding.tvEmpty.visibility = View.GONE
-                        }
-
-                        is UiState.Error -> {
-                            binding.tvEmpty.visibility = View.VISIBLE
-                            binding.progressBar.visibility = View.GONE
-                            Toast.makeText(this@SearchActivity, it.errorMessage, Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                    }
-                }
-            }
+        setContent {
+            SearchRoute({ finish() })
         }
     }
-
-    private fun renderList(articleList: ArrayList<Article>) {
-        adapter.addData(articleList)
-    }
-
-    private fun setListener() {
-        binding.svSearchNews.apply {
-            isIconified = false
-            requestFocus()
-
-            setQueryHint("Search news")
-        }
-    }
-
-    private fun setUpQuerySearchStateFlow() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                binding.svSearchNews.getQueryTextChangeStateFlow()
-                    .collect { query ->
-                        searchViewModel.searchBy(query)
-                    }
-            }
-        }
-    }
-
 
 }

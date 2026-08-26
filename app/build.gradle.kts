@@ -85,5 +85,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
+    // image loading
+    implementation(libs.coil.compose)
+
 
 }

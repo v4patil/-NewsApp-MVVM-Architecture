@@ -28,6 +28,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.vibhorpatil.newsapp.domain.model.NewsCriteria
 import com.vibhorpatil.newsapp.ui.base.EmptyScreen
+import com.vibhorpatil.newsapp.ui.base.LoadingScreen
 import com.vibhorpatil.newsapp.ui.base.UiState
 
 @Composable
@@ -59,9 +60,7 @@ private fun NewsCriteriaScreen(
 
         when (val state = uiState) {
             is UiState.Loading -> {
-                CircularProgressIndicator(modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues))
+                LoadingScreen(modifier = Modifier.padding(paddingValues).fillMaxSize())
             }
 
             is UiState.Error -> {}
