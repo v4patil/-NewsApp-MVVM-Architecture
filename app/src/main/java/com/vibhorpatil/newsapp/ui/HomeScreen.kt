@@ -18,10 +18,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vibhorpatil.newsapp.ui.base.TopAppBar
+import com.vibhorpatil.newsapp.ui.navigation.NavigationAction
 
 @Composable
 fun HomeScreenRoute(
-    navigateTo: (Int) -> Unit
+    navAction : NavigationAction
 ) {
 
     Scaffold(
@@ -36,19 +37,19 @@ fun HomeScreenRoute(
         ) {
             LazyColumn {
                 item {
-                    HomeListItem("Top HeadLines", { navigateTo(0) })
+                    HomeListItem("Top HeadLines", { navAction.navigateToHeadlineScreen(0) })
                 }
                 item {
-                    HomeListItem("News Source", { navigateTo(1) })
+                    HomeListItem("News Source", { navAction.navigateToCriteriaScreen(1) })
                 }
                 item {
-                    HomeListItem("Countries", { navigateTo(2) })
+                    HomeListItem("Countries", { navAction.navigateToCriteriaScreen(2) })
                 }
                 item {
-                    HomeListItem("Languages", { navigateTo(3) })
+                    HomeListItem("Languages", { navAction.navigateToCriteriaScreen(3) })
                 }
                 item {
-                    HomeListItem("Search", { navigateTo(4) })
+                    HomeListItem("Search", { navAction.navigateToSearchScreen() })
                 }
             }
         }
