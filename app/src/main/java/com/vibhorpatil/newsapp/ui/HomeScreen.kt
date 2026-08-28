@@ -37,7 +37,7 @@ fun HomeScreenRoute(
         ) {
             LazyColumn {
                 item {
-                    HomeListItem("Top HeadLines", { navAction.navigateToHeadlineScreen(0) })
+                    HomeListItem("Top HeadLines", { navAction.navigateToHeadlineScreen() })
                 }
                 item {
                     HomeListItem("News Source", { navAction.navigateToCriteriaScreen(1) })

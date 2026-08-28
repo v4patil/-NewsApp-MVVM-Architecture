@@ -6,16 +6,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.vibhorpatil.newsapp.ui.HomeScreenRoute
+import com.vibhorpatil.newsapp.ui.navigation.NewsAppArgs.FILTER_BY
 import com.vibhorpatil.newsapp.ui.navigation.NewsAppDestination.CRITERIA_SCREEN_ROUTE
 import com.vibhorpatil.newsapp.ui.navigation.NewsAppDestination.HEADLINE_SCREEN_ROUTE
 import com.vibhorpatil.newsapp.ui.navigation.NewsAppDestination.HOME_SCREEN_ROUTE
 import com.vibhorpatil.newsapp.ui.navigation.NewsAppDestination.SEARCH_SCREEN_ROUTE
 import com.vibhorpatil.newsapp.ui.search.SearchRoute
+import com.vibhorpatil.newsapp.ui.topheadline.TopHeadLineRoute
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
@@ -44,11 +48,18 @@ fun NewsNavGraph(
         }
         composable(
             route = HEADLINE_SCREEN_ROUTE,
+            arguments = listOf(
+                navArgument(FILTER_BY) { type = NavType.StringType; defaultValue = "" }
+            )
         ) {
+            TopHeadLineRoute({navController.popBackStack()})
         }
 
         composable(
             route = CRITERIA_SCREEN_ROUTE,
+            arguments = listOf(
+                navArgument(FILTER_BY){ type = NavType.IntType; defaultValue = 0}
+            )
         ) {
         }
 

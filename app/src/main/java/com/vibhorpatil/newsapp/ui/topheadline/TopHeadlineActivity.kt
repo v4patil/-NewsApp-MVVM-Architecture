@@ -6,13 +6,10 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.vibhorpatil.newsapp.utils.AppConstant.COUNTRY
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TopHeadlineActivity : AppCompatActivity() {
-
-    val topHeadLineViewmodel: TopHeadLineViewmodel by viewModels()
 
     companion object {
         private const val EXTRA_LANGUAGE_ID = "language_id"
@@ -35,31 +32,6 @@ class TopHeadlineActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TopHeadLineRoute({ finish() })
-        }
-        getIntentData()
-    }
-
-    private fun getIntentData() {
-        val languageId = intent.getStringExtra(EXTRA_LANGUAGE_ID)
-        val sourceId = intent.getStringExtra(EXTRA_SOURCE_ID)
-        val countryCode = intent.getStringExtra(EXTRA_COUNTRY_CODE)
-
-        when {
-            languageId != null -> {
-                topHeadLineViewmodel.getTopHeadLinesByLanguage(languageId)
-            }
-
-            sourceId != null -> {
-                topHeadLineViewmodel.getTopHeadLinesBySource(sourceId)
-            }
-
-            countryCode != null -> {
-                topHeadLineViewmodel.getTopHeadLines(countryCode)
-            }
-
-            else -> {
-                topHeadLineViewmodel.getTopHeadLines(COUNTRY)
-            }
         }
     }
 }

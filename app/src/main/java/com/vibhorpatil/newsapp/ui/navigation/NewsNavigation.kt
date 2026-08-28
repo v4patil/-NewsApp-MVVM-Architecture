@@ -2,13 +2,12 @@ package com.vibhorpatil.newsapp.ui.navigation
 
 import androidx.navigation.NavController
 import com.vibhorpatil.newsapp.ui.navigation.NewsAppArgs.FILTER_BY
-import com.vibhorpatil.newsapp.ui.navigation.NewsAppDestination.CRITERIA_SCREEN_ROUTE
-import com.vibhorpatil.newsapp.ui.navigation.NewsAppDestination.HEADLINE_SCREEN_ROUTE
 import com.vibhorpatil.newsapp.ui.navigation.NewsAppDestination.SEARCH_SCREEN_ROUTE
 import com.vibhorpatil.newsapp.ui.navigation.NewsAppScreen.CRITERIA
 import com.vibhorpatil.newsapp.ui.navigation.NewsAppScreen.HEADLINE
 import com.vibhorpatil.newsapp.ui.navigation.NewsAppScreen.HOME
 import com.vibhorpatil.newsapp.ui.navigation.NewsAppScreen.SEARCH
+import com.vibhorpatil.newsapp.utils.AppConstant.COUNTRY
 
 private object NewsAppScreen {
     const val HOME = "HOME"
@@ -30,12 +29,12 @@ object NewsAppDestination {
 
 class NavigationAction(private val navController: NavController) {
 
-    fun navigateToHeadlineScreen(filterBy: Int) {
-        navController.navigate("$HEADLINE_SCREEN_ROUTE?$FILTER_BY={$filterBy}")
+    fun navigateToHeadlineScreen(filterBy: String = COUNTRY) {
+        navController.navigate("$HEADLINE?$FILTER_BY=$filterBy")
     }
 
     fun navigateToCriteriaScreen(filterBy: Int) {
-        navController.navigate("$CRITERIA_SCREEN_ROUTE?$FILTER_BY={$filterBy}")
+        navController.navigate("$CRITERIA?$FILTER_BY=$filterBy")
     }
 
     fun navigateToSearchScreen() {

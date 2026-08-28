@@ -24,7 +24,7 @@ fun TopHeadLineRoute(
 }
 
 @Composable
-fun TopHeadLineScreen(
+private fun TopHeadLineScreen(
     onBack: () -> Unit,
     uiState: UiState<List<Article>>,
     onItemClick: (String) -> Unit = {}
