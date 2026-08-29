@@ -1,6 +1,7 @@
 package com.vibhorpatil.newsapp.ui.newscriteria
 
 import android.content.Context
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
@@ -9,6 +10,7 @@ import com.vibhorpatil.newsapp.R
 import com.vibhorpatil.newsapp.domain.model.NewsCriteria
 import com.vibhorpatil.newsapp.domain.repository.NewsRepository
 import com.vibhorpatil.newsapp.ui.base.UiState
+import com.vibhorpatil.newsapp.ui.navigation.NewsAppArgs.FILTER_BY
 import com.vibhorpatil.newsapp.utils.AppConstant.BY_COUNTRY
 import com.vibhorpatil.newsapp.utils.AppConstant.BY_LANGUAGE
 import com.vibhorpatil.newsapp.utils.AppConstant.BY_SOURCE
@@ -26,17 +28,21 @@ import javax.inject.Inject
 @HiltViewModel
 class NewsCriteriaViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val newsRepositoryImpl: NewsRepository
+    private val newsRepositoryImpl: NewsRepository,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    var filterBy: Int = BY_LANGUAGE
+    var filterBy: Int = savedStateHandle[FILTER_BY] ?: BY_LANGUAGE
 
     private var _uiState = MutableStateFlow<UiState<List<NewsCriteria>>>(UiState.Loading)
 
     val uiState: StateFlow<UiState<List<NewsCriteria>>> = _uiState
 
-    fun getData(filterBy: Int) {
-        this.filterBy = filterBy
+    init {
+        getData()
+    }
+
+   private fun getData() {
         when (filterBy) {
             BY_COUNTRY -> {
                 viewModelScope.launch {

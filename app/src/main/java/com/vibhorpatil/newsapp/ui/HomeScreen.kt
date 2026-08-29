@@ -19,6 +19,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vibhorpatil.newsapp.ui.base.TopAppBar
 import com.vibhorpatil.newsapp.ui.navigation.NavigationAction
+import com.vibhorpatil.newsapp.utils.AppConstant.BY_COUNTRY
+import com.vibhorpatil.newsapp.utils.AppConstant.BY_LANGUAGE
+import com.vibhorpatil.newsapp.utils.AppConstant.BY_SOURCE
 
 @Composable
 fun HomeScreenRoute(
@@ -40,13 +43,13 @@ fun HomeScreenRoute(
                     HomeListItem("Top HeadLines", { navAction.navigateToHeadlineScreen() })
                 }
                 item {
-                    HomeListItem("News Source", { navAction.navigateToCriteriaScreen(1) })
+                    HomeListItem("News Source", { navAction.navigateToCriteriaScreen(BY_SOURCE) })
                 }
                 item {
-                    HomeListItem("Countries", { navAction.navigateToCriteriaScreen(2) })
+                    HomeListItem("Countries", { navAction.navigateToCriteriaScreen(BY_COUNTRY) })
                 }
                 item {
-                    HomeListItem("Languages", { navAction.navigateToCriteriaScreen(3) })
+                    HomeListItem("Languages", { navAction.navigateToCriteriaScreen(BY_LANGUAGE) })
                 }
                 item {
                     HomeListItem("Search", { navAction.navigateToSearchScreen() })

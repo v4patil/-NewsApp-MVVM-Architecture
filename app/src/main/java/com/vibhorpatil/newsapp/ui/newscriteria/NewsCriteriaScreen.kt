@@ -30,16 +30,19 @@ import com.vibhorpatil.newsapp.ui.base.EmptyScreen
 import com.vibhorpatil.newsapp.ui.base.LoadingScreen
 import com.vibhorpatil.newsapp.ui.base.TopAppBar
 import com.vibhorpatil.newsapp.ui.base.UiState
+import com.vibhorpatil.newsapp.ui.navigation.NavigationAction
 
 @Composable
 fun NewsCriteriaRoute(
     onBack: () -> Unit,
-    onItemClick: (NewsCriteria) -> Unit,
+    navAction: NavigationAction,
     viewModel: NewsCriteriaViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    NewsCriteriaScreen(onBack, uiState, onItemClick)
+    NewsCriteriaScreen(onBack, uiState, {
+        navAction.navigateToHeadlineScreen(viewModel.filterBy, it.id)
+    })
 }
 
 @Composable

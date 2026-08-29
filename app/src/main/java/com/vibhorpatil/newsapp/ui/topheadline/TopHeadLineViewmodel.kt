@@ -7,6 +7,9 @@ import com.vibhorpatil.newsapp.data.model.Article
 import com.vibhorpatil.newsapp.domain.repository.NewsRepository
 import com.vibhorpatil.newsapp.ui.base.UiState
 import com.vibhorpatil.newsapp.ui.navigation.NewsAppArgs.FILTER_BY
+import com.vibhorpatil.newsapp.ui.navigation.NewsAppArgs.FILTER_BY_ID
+import com.vibhorpatil.newsapp.utils.AppConstant.BY_LANGUAGE
+import com.vibhorpatil.newsapp.utils.AppConstant.BY_SOURCE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,14 +23,27 @@ class TopHeadLineViewmodel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val filterBy: String = savedStateHandle[FILTER_BY] ?: ""
+    private val filterBy: Int = savedStateHandle[FILTER_BY] ?: 0
+    private val filterById: String = savedStateHandle[FILTER_BY_ID] ?: ""
 
     private val _uiState = MutableStateFlow<UiState<List<Article>>>(UiState.Loading)
 
     val uiState: StateFlow<UiState<List<Article>>> = _uiState
 
     init {
-        getTopHeadLines(filterBy)
+        when (filterBy) {
+            BY_SOURCE -> {
+                getTopHeadLinesBySource(filterById)
+            }
+
+            BY_LANGUAGE -> {
+                getTopHeadLinesByLanguage(filterById)
+            }
+
+            else -> {
+                getTopHeadLines(filterById)
+            }
+        }
     }
 
     private fun getTopHeadLines(countryCode: String) {

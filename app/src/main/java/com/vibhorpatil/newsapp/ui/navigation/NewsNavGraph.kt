@@ -14,12 +14,15 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.vibhorpatil.newsapp.ui.HomeScreenRoute
 import com.vibhorpatil.newsapp.ui.navigation.NewsAppArgs.FILTER_BY
+import com.vibhorpatil.newsapp.ui.navigation.NewsAppArgs.FILTER_BY_ID
 import com.vibhorpatil.newsapp.ui.navigation.NewsAppDestination.CRITERIA_SCREEN_ROUTE
 import com.vibhorpatil.newsapp.ui.navigation.NewsAppDestination.HEADLINE_SCREEN_ROUTE
 import com.vibhorpatil.newsapp.ui.navigation.NewsAppDestination.HOME_SCREEN_ROUTE
 import com.vibhorpatil.newsapp.ui.navigation.NewsAppDestination.SEARCH_SCREEN_ROUTE
+import com.vibhorpatil.newsapp.ui.newscriteria.NewsCriteriaRoute
 import com.vibhorpatil.newsapp.ui.search.SearchRoute
 import com.vibhorpatil.newsapp.ui.topheadline.TopHeadLineRoute
+import com.vibhorpatil.newsapp.utils.AppConstant.COUNTRY
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
@@ -49,7 +52,8 @@ fun NewsNavGraph(
         composable(
             route = HEADLINE_SCREEN_ROUTE,
             arguments = listOf(
-                navArgument(FILTER_BY) { type = NavType.StringType; defaultValue = "" }
+                navArgument(FILTER_BY) { type = NavType.IntType; defaultValue = 1 },
+                navArgument(FILTER_BY_ID) { type = NavType.StringType; defaultValue = COUNTRY }
             )
         ) {
             TopHeadLineRoute({navController.popBackStack()})
@@ -61,6 +65,7 @@ fun NewsNavGraph(
                 navArgument(FILTER_BY){ type = NavType.IntType; defaultValue = 0}
             )
         ) {
+            NewsCriteriaRoute({navController.popBackStack()}, navigationAction)
         }
 
         composable(

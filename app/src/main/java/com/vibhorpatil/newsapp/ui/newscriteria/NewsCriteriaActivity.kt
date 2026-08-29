@@ -32,9 +32,9 @@ class NewsCriteriaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            NewsCriteriaRoute({ finish() }, { newsCriteria ->
-                navigateTo(newsCriteria)
-            })
+//            NewsCriteriaRoute({ finish() }, { newsCriteria ->
+//                navigateTo(newsCriteria)
+//            })
         }
         getIntentData()
     }
@@ -43,7 +43,6 @@ class NewsCriteriaActivity : AppCompatActivity() {
         val bundle = intent.extras ?: return
         bundle.let {
             val filterBy = bundle.getInt(FILTER_BY)
-            viewModel.getData(filterBy)
         }
     }
 
