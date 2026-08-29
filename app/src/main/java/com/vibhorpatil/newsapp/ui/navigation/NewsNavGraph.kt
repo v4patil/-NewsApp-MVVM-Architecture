@@ -71,7 +71,7 @@ fun NewsNavGraph(
         composable(
             route = SEARCH_SCREEN_ROUTE
         ) {
-            SearchRoute()
+            SearchRoute({navController.popBackStack()})
         }
 
     }
