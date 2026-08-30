@@ -28,7 +28,7 @@ class SearchViewModel @Inject constructor(private val repository: NewsRepository
 
     val uiState: StateFlow<UiState<List<Article>>> = _uiState
 
-    private val searchQuery = MutableStateFlow("")
+    val searchQuery = MutableStateFlow("")
 
     init {
         viewModelScope.launch {
